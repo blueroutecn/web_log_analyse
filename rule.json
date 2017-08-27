@@ -1,0 +1,94 @@
+[
+    {
+        "patterns": [
+            {
+                "part": "etc.*?issue|etc.*?hosts|etc.*?passwd|windows/win.ini",
+                "type": "regex"
+            }
+        ],
+        "tag": "file_include", 
+        "level": "high"
+    },
+    {
+        "patterns": [
+            {
+                "part": "\\<.+javascript:window\\[.{1}\\\\x|<.*=(&#\\d+?;?)+?>|<.*(data|src)=data:text\\/html.*>|\\b(alert\\(|confirm\\(|expression\\(|s*script\\(|prompt\\(|benchmark\\s*?\\(.*\\))",
+                "type": "regex"
+            }
+        ],
+        "tag": "XSS", 
+        "level": "medium"
+    },
+    {
+        "patterns": [
+            {
+                "part": "(sleep\\s*?\\(.*\\)|\\b(group_)?concat[\\s\\/\\*]*?\\([^\\)]+?\\)|\bcase[\\s\/\\*]*?when[\\s\/\\*]*?\\([^\\)]+?\\)|load_file\\s*?\\()|<[a-z]+?\\b[^>]*?\\bon([a-z]{4,})\\s*?=|^\\+\\/v(8|9)|\\b(and|or|OR)\\b\\s*?([\\(\\)'\"\\d]+?=[\\(\\)'\"\\d]+?|[\\(\\)'\"a-zA-Z]+?=[\\(\\)'\"a-zA-Z]+?|>|<|\\s+?[\\w]+?\\s+?\\bin\\b\\s*?\\(|\\blike\\b\\s+?[\"'])|\\/\\*.*\\*\\/|\\bEXEC\\b|UNION.+?SELECT\\s*(\\(.+\\)\\s*|@{1,2}.+?\\s*|\\s+?.+?|(`|'|\").*?(`|'|\")\\s*)|UPDATE\\s*(\\(.+\\)\\s*|@{1,2}.+?\\s*|\\s+?.+?|(`|'|\").*?(`|'|\")\\s*)SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE)@{0,2}(\\(.+\\)|\\s+?.+?\\s+?|(`|'|\").*?(`|'|\"))FROM(\\(.+\\)|\\s+?.+?|(`|'|\").*?(`|'|\"))|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)",
+                "type": "regex"
+            },
+            {
+                "part": "(convert\\s*?\\(int,CHAR\\(|\\(CONVERT\\s*?\\(INT|\\b(and|or|OR|xor|XOR|AND|/**/)\\b",
+                "type": "regex"
+            }
+        ],
+        "tag": "sqlinject", 
+        "level": "high"
+    },
+    {
+        "patterns": [
+            {
+                "part": ".git/config",
+                "type": "match"
+            }
+        ],
+        "tag": "git", 
+        "level": "high"
+    },
+    {
+        "patterns": [
+            {
+                "part": ".DS_Store",
+                "type": "match"
+            }
+        ],
+        "tag": "DS_Store", 
+        "level": "high"
+    },
+    {
+        "patterns": [
+            {
+                "part": ".svn/all-wcprops",
+                "type": "match"
+            },
+            {
+                "part": ".svn/all-wcpropss",
+                "type": "match"
+            },
+            {
+                "part": ".svn/entries",
+                "type": "match"
+            }
+        ],
+        "tag": "svn", 
+        "level": "high"
+    },
+    {
+        "patterns": [
+            {
+                "part": "crossdomain.xml",
+                "type": "match"
+            }
+        ],
+        "tag": "crossdomain.xml", 
+        "level": "low"
+    },
+    {
+        "patterns": [
+            {
+                "part": "CVS/ROOT",
+                "type": "match"
+            }
+        ],
+        "tag": "cvs_root", 
+        "level": "low"
+    }
+]
